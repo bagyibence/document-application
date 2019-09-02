@@ -1,6 +1,5 @@
 package hu.example.documentapi;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ public class ParagraphController {
     }
     
     @GetMapping
-    public List<String> getParagraphs(@RequestParam(defaultValue = "0") int first, @RequestParam(defaultValue = "100") int count) {
+    public ParagraphResponseDTO getParagraphs(@RequestParam(defaultValue = "0") int first, @RequestParam(defaultValue = "100") int count) {
         return paragraphService.getParagraphs(first, count);
     }
 }

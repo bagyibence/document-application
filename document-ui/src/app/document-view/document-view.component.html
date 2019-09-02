@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-10 offset-md-1" *ngIf="(totalRecords | async) as total">
+            <p-virtualScroller [value]="paragraphs | async" scrollHeight="600px" [itemSize]="50" [rows]="rows"
+                [cache]="true" [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="total">
+                <ng-template let-paragraph pTemplate="item">
+                    <div [innerHTML]="paragraph" class="paragraph-content" #par></div>
+                </ng-template>
+                <ng-template let-paragraph pTemplate="loadingItem">
+                    Loading...
+                </ng-template>
+            </p-virtualScroller>
+        </div>
+    </div>
+
+    <div class="text-danger font-weight-bold">
+        Count: {{doc.getElementsByClassName('paragraph-content').length}}
+    </div>
+</div>

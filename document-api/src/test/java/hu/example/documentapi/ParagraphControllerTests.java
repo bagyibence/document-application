@@ -27,12 +27,15 @@ public class ParagraphControllerTests {
 
     @Test
     public void getParagraphShouldReturnResultFromService() throws Exception {
-        given(this.service.getParagraphs(anyInt(),anyInt())).willReturn(Arrays.asList("foo", "bar"));
+        ParagraphResponseDTO resp = new ParagraphResponseDTO();
+        resp.setData(Arrays.asList("foo", "bar"));
+        resp.setTotal(10);
+        given(this.service.getParagraphs(anyInt(),anyInt())).willReturn(resp);
         
-        this.mockMvc.perform(get("/api/v1/paragraph?start=0&count=10"))
+        this.mockMvc.perform(get("/api/v1/paragraph?start=0&count=2"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("['foo', 'bar']"));
+                .andExpect(content().json("{'data':['foo', 'bar'], 'total': 10}"));
     }
 }
 
